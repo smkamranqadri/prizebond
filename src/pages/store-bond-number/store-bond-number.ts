@@ -14,9 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StoreBondNumber {
   isSelected: any;
+  navBarData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    //console.log(this.isSelected);
+    this.navBarData = this.navParams.data; 
   }
   addBond() {
 

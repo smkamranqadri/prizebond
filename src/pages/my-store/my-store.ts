@@ -11,15 +11,15 @@ export class MyStore {
 storePrizeBond :any;
 constructor(public navCtrl: NavController, public navParams: NavParams) {
   this.storePrizeBond = [
-    {number:'100',store:0},
-    {number:'200',store:0},
-    {number:'500',store:0},
-    {number:'750',store:0},
-    {number:'1500',store:0},
-    {number:'7500',store:0},
-    {number:'15000',store:0},
-    {number:'25000',store:0},
-    {number:'40000',store:0}
+    {bondNumber:'100',store:0,number:[]},
+    {bondNumber:'200',store:0,number:[]},
+    {bondNumber:'500',store:0,number:[]},
+    {bondNumber:'750',store:0,number:[]},
+    {bondNumber:'1500',store:0,number:[]},
+    {bondNumber:'7500',store:0,number:[]},
+    {bondNumber:'15000',store:0,number:[]},
+    {bondNumber:'25000',store:0,number:[]},
+    {bondNumber:'40000',store:0,number:[]}
     ];
 }
 

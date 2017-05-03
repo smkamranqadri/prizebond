@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Bond Number: 100</ion-title>
+    <ion-title>Bond Number: {{navBarData}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,6 +19,7 @@
       <ion-radio name="select" value="single"></ion-radio>
     </ion-item>
   </div>
+
   <div>
     <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
       <ion-item>
@@ -31,6 +32,7 @@
       </div>
     </form>
   </div>
+
   <div>
     <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
       <ion-item>
@@ -47,9 +49,9 @@
       </div>
     </form>
   </div>
+
   <div>
     <button ion-button secondary (click)="searchBond()" block round>SEARCH</button>
   </div>
-
 
 </ion-content>
