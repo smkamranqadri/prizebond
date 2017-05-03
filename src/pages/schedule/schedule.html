@@ -1,0 +1,29 @@
+<!--
+  Generated template for the Schedule page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>schedule</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>Bond</ion-col>
+          <ion-col col-4>Draw</ion-col>
+          <ion-col col-4>Date</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let list of prizeBondSchedule">
+          <ion-col col-4>{{list.number}}</ion-col>
+          <ion-col col-4>{{list.draw}}</ion-col>
+          <ion-col col-4>{{list.date}}</ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

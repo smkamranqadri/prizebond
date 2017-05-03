@@ -1,0 +1,25 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+       <ion-item menuClose (click)="openPage(pages[1])" style="margin-top: 10px">
+        <ion-icon name="home" md="md-home"></ion-icon>&nbsp;{{pages[1].title}}
+      </ion-item>
+      <ion-item menuClose (click)="openPage(pages[3])" style="margin-top: 10px">
+        <ion-icon name="briefcase" md="md-briefcase"></ion-icon>&nbsp;{{pages[3].title}}
+      </ion-item>
+      <ion-item menuClose (click)="openPage(pages[4])" style="margin-top: 10px">
+        <ion-icon name="time" md="md-time"></ion-icon>&nbsp;{{pages[4].title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,55 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bond Number: 100</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div style="width: 100%; display: flex; padding-left: 20px">
+    <ion-item style="width: 45%;">
+      <ion-label>Range</ion-label>
+      <ion-radio name="select" value="range"></ion-radio>
+    </ion-item>
+    <ion-item style="width: 45%;">
+      <ion-label>Single</ion-label>
+      <ion-radio name="select" value="single"></ion-radio>
+    </ion-item>
+  </div>
+  <div>
+    <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
+      <ion-item>
+        <ion-label floating>Bond Number</ion-label>
+        <ion-input type="text" name="singleBondNumber" required></ion-input>
+      </ion-item>
+      <br/>
+      <div>
+        <button ion-button secondary type="submit" round>ADD</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
+      <ion-item>
+        <ion-label floating>From</ion-label>
+        <ion-input type="text" name="from" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>To</ion-label>
+        <ion-input type="text" name="to" required></ion-input>
+      </ion-item>
+      <br/>
+      <div>
+        <button ion-button secondary type="submit" round>ADD</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <button ion-button secondary (click)="searchBond()" block round>SEARCH</button>
+  </div>
+
+
+</ion-content>
