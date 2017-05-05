@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -9,18 +8,19 @@
 
 
 <ion-content padding>
-  <div style="width: 100%; display: flex; padding-left: 20px">
+
+  <div style="width: 100%; display: flex; padding-left: 20px" radio-group [(ngModel)]="searchCategory" (ionChange)="doSomething($event)" >
     <ion-item style="width: 45%;">
       <ion-label>Range</ion-label>
-      <ion-radio name="select" value="range"></ion-radio>
+      <ion-radio value="range"></ion-radio>
     </ion-item>
+    
     <ion-item style="width: 45%;">
       <ion-label>Single</ion-label>
-      <ion-radio name="select" value="single"></ion-radio>
+      <ion-radio selected value="single"></ion-radio>
     </ion-item>
   </div>
-
-  <div>
+  <div *ngIf="searchCategory == 'single'">
     <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
       <ion-item>
         <ion-label floating>Bond Number</ion-label>
@@ -33,7 +33,7 @@
     </form>
   </div>
 
-  <div>
+  <div *ngIf="searchCategory == 'range'">
     <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
       <ion-item>
         <ion-label floating>From</ion-label>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -12,12 +12,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-store-bond-number',
   templateUrl: 'store-bond-number.html',
 })
-export class StoreBondNumber {
+export class StoreBondNumber implements OnInit {
   isSelected: any;
   navBarData: any;
-
+  searchCategory: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.navBarData = this.navParams.data; 
+    this.navBarData = this.navParams.data;
+  }
+  ngOnInit() {
+    
+  }
+  doSomething(event){
+
   }
   addBond() {
 
