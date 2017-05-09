@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {  SQLite } from 'ionic-native';
+import { Database } from '../providers/database';
+import { Data } from '../providers/data';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { StoreBondNumber } from '../pages/store-bond-number/store-bond-number';
@@ -19,7 +20,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private db: Database, private data: Data) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,19 +36,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // let db = new SQLite();
-      // db.openDatabase({
-      //   name: "hello.db",
-      //   location: "default"
-      // }).then(() => {
-      //   db.executeSql("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT)", {}).then((data) => {
-      //     console.log("TABLE CREATED: ", data);
-      //   }, (error) => {
-      //     console.error("Unable to execute sql", error);
-      //   })
-      // }, (error) => {
-      //   console.error("Unable to open database", error);
-      // });
+      this.db.openDataBase();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

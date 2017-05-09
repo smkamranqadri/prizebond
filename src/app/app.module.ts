@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
@@ -11,7 +12,8 @@ import { ListPage } from '../pages/list/list';
 import { StoreBondNumber } from '../pages/store-bond-number/store-bond-number';
 import { MyStore } from '../pages/my-store/my-store';
 import { Schedule } from '../pages/schedule/schedule';
-
+import { Database } from '../providers/database';
+import { Data } from '../providers/data';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -27,6 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+     HttpModule 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +41,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Schedule
   ],
   providers: [
-    StatusBar, SplashScreen, File, Transfer, SQLite,
+    StatusBar, SplashScreen, File, Transfer, SQLite, Database,Data,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

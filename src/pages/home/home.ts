@@ -1,3 +1,4 @@
+import { Data } from '../../providers/data';
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
@@ -16,9 +17,9 @@ declare var cordova: any;
 export class HomePage {
   storeBondNumber: any;
   prizeBondCategory = [];
-  public database: any;
+
   public bondArr: Array<Object>;
-  constructor(public navCtrl: NavController, private platform: Platform, private transfer: Transfer, private file: File, private sqlite: SQLite) {
+  constructor(public navCtrl: NavController, private platform: Platform, private transfer: Transfer, private file: File, private sqlite: SQLite, private data: Data) {
     this.prizeBondCategory = ['100', '200', '500', '750', '1500', '7500', '15000', '25000', '40000'];
     this.storeBondNumber = StoreBondNumber;
     this.platform.ready().then(() => {
@@ -40,7 +41,6 @@ export class HomePage {
   downloadFile() {
     const fileTransfer: TransferObject = this.transfer.create();
     const url = "https://drive.google.com/open?id=0B1BZyhMfg4s5SnplRkVwRTRsS2c"
-
     fileTransfer.download(url, cordova.file.applicationStorageDirectory)
       .then(data => {
         console.log("data", data)
@@ -49,8 +49,6 @@ export class HomePage {
         console.log("Err", err)
       });
   }
-
-
   dbRemove() {
     window.plugins.sqlDB.remove('bond.db', 0, this.removeSuccess, this.removeError);
   }
@@ -69,30 +67,29 @@ export class HomePage {
   copyError(err) {
     console.log("copyError", err)
   }
-  find() {
-    // this.database = new SQLite();
-    // this.database.openDatabase({ name: "bond.db", location: "default" })
-    //   .then(() => {
-    //     this.database.executeSql("SELECT * FROM bond where number = 084694", []).then((data) => {
-    //       console.log("Find: " + JSON.stringify(data));
-    //     }, (error) => {
-    //       console.log("Find ERROR: " + JSON.stringify(error));
-    //     });
-    //   }, (error) => {
-    //     console.log("DB ERROR: ", error);
-    //   });
-
-    this.sqlite.create({ name: 'bond.db', location: 'default' })
-      .then((db: SQLiteObject) => {
-        db.executeSql('SELECT * FROM bond where number = 001574', {})
-          .then((d) => {
-            debugger
-            console.log('Executed SQL', d)
-          })
-          .catch(e => console.log('Executed SQL Error: ', e));
+  single() {
+    let num = '1574'
+    this.data.findOne(num)
+      .then((d) => {
+        console.log('Executed SQL', d)
       })
-      .catch(e => console.log('DB Create Error: ', e));
+      .catch(e => {
+        console.log('Executed SQL Error: ', e)
+      });
   }
+
+  range() {
+    let start = '515743';
+    let end = '516339';
+    this.data.findSeries(start, end)
+      .then((d) => {
+        console.log('Executed SQL', d)
+      })
+      .catch(e => {
+        console.log('Executed SQL Error: ', e)
+      });
+  }
+
   createDraw() {
     this.sqlite.create({ name: 'bond.db', location: 'default' })
       .then((db: SQLiteObject) => {
@@ -102,6 +99,7 @@ export class HomePage {
       })
       .catch(e => console.log('DB Create Error: ', e));
   }
+
   createBond() {
     this.sqlite.create({ name: 'bond.db', location: 'default' })
       .then((db: SQLiteObject) => {
@@ -111,6 +109,7 @@ export class HomePage {
       })
       .catch(e => console.log('DB Create Error: ', e));
   }
+
   addBond() {
     this.sqlite.create({ name: 'bond.db', location: 'default' })
       .then((db: SQLiteObject) => {
@@ -120,17 +119,5 @@ export class HomePage {
       })
       .catch(e => console.log('DB Create Error: ', e));
   }
-  outData() {
-    this.database = new SQLite();
-    this.database.openDatabase({ name: "bond.db", location: "default" })
-      .then(() => {
-        this.database.executeSql("SELECT * FROM bond", []).then((data) => {
-          console.log("outData: " + JSON.stringify(data));
-        }, (error) => {
-          console.log("outData ERROR: " + JSON.stringify(error));
-        });
-      }, (error) => {
-        console.log("DB ERROR: ", error);
-      });
-  }
+
 }
