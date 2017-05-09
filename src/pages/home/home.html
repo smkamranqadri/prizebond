@@ -21,6 +21,18 @@
 </ion-header>
 
 <ion-content padding>
+  <button (click)="find()">
+    Find
+  </button>
+  <button (click)="createDraw()">
+    Draw
+  </button>
+  <button (click)="createBond()">
+    Bond
+  </button>
+  <button (click)="addBond()">
+    Add
+  </button>
   <ion-list>
     <ion-item *ngFor="let list of prizeBondCategory" [navPush]="storeBondNumber" [navParams]="list">{{list}}</ion-item>
   </ion-list>

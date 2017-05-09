@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { SQLite } from '@ionic-native/sqlite';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -35,8 +38,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Schedule
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
+    StatusBar, SplashScreen, File, Transfer, SQLite,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
