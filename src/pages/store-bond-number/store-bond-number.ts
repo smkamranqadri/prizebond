@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Data } from '../../providers/data';
-
+declare var window: any;
+declare var cordova: any;
 @IonicPage()
 @Component({
   selector: 'page-store-bond-number',
@@ -36,16 +37,31 @@ export class StoreBondNumber implements OnInit {
     }
     else {
       this.data.bondRangeStorage(form.value, this.navBarData)
-        .then((d) => {
+    /*    .then((d) => {
           console.log('Storage DB', d)
         })
         .catch(e => {
           console.log('Storage Error: ', e)
-        });
+        });*/
     }
   }
   searchBond() {
-
+    this.data.findSingle(121212)
+      .then((d) => {
+        console.log('Storage DB Find', d)
+      })
+      .catch(e => {
+        console.log('Storage Find Error: ', e)
+      });
+  }
+  dbTo() {
+    window.plugins.sqlDB.copyDbToStorage('bond.db', 1, '/sdcard/mydb/', true, this.success, this.error);
+  }
+  success(data) {
+    console.log("toData", data);
+  }
+  error(err) {
+    console.log("toError", err)
   }
 }
 

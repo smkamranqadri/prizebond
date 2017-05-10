@@ -27,7 +27,7 @@ export class HomePage {
 
 
   dbTo() {
-    window.plugins.sqlDB.copyDbToStorage('bond.db', 1, cordova.file.applicationStorageDirectory, true, this.success, this.error);
+    window.plugins.sqlDB.copyDbToStorage('bond.db', 1, ' /sdcard/mydb/', true, this.success, this.error);
   }
   success(data) {
     console.log("toData", data);
