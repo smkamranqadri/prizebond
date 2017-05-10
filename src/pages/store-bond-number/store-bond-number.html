@@ -9,7 +9,7 @@
 
 <ion-content padding>
 
-  <div style="width: 100%; display: flex; padding-left: 20px" radio-group [(ngModel)]="searchCategory" (ionChange)="doSomething($event)" >
+  <div style="width: 100%; display: flex; padding-left: 20px" radio-group [(ngModel)]="bondCategory" (ionChange)="doSomething($event)" >
     <ion-item style="width: 45%;">
       <ion-label>Range</ion-label>
       <ion-radio value="range"></ion-radio>
@@ -20,11 +20,11 @@
       <ion-radio selected value="single"></ion-radio>
     </ion-item>
   </div>
-  <div *ngIf="searchCategory == 'single'">
-    <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
+  <div *ngIf="bondCategory == 'single'">
+    <form #single="ngForm" (ngSubmit)="addBond(single)" novalidate>
       <ion-item>
         <ion-label floating>Bond Number</ion-label>
-        <ion-input type="text" name="singleBondNumber" required></ion-input>
+        <ion-input type="number" name="single" #single="ngModel" ngModel  required></ion-input>
       </ion-item>
       <br/>
       <div>
@@ -33,15 +33,15 @@
     </form>
   </div>
 
-  <div *ngIf="searchCategory == 'range'">
-    <form #form="ngForm" (ngSubmit)="addBond(form)" novalidate>
+  <div *ngIf="bondCategory == 'range'">
+    <form #range="ngForm" (ngSubmit)="addBond(range)" novalidate>
       <ion-item>
         <ion-label floating>From</ion-label>
-        <ion-input type="text" name="from" required></ion-input>
+        <ion-input type="number" name="from" #form="ngModel" ngModel required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>To</ion-label>
-        <ion-input type="text" name="to" required></ion-input>
+        <ion-input type="number" name="to" #to="ngModel" ngModel required></ion-input>
       </ion-item>
       <br/>
       <div>

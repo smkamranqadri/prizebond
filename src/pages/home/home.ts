@@ -22,9 +22,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, private platform: Platform, private transfer: Transfer, private file: File, private sqlite: SQLite, private data: Data) {
     this.prizeBondCategory = ['100', '200', '500', '750', '1500', '7500', '15000', '25000', '40000'];
     this.storeBondNumber = StoreBondNumber;
-    this.platform.ready().then(() => {
-
-    });
+   
   }
 
 
@@ -68,7 +66,7 @@ export class HomePage {
     console.log("copyError", err)
   }
   single() {
-    let num = '1574'
+    let num = '515743'
     this.data.findOne(num)
       .then((d) => {
         console.log('Executed SQL', d)

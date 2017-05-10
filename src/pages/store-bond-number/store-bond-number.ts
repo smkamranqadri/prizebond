@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Data } from '../../providers/data';
 
-/**
- * Generated class for the StoreBondNumber page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-store-bond-number',
@@ -15,20 +10,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class StoreBondNumber implements OnInit {
   isSelected: any;
   navBarData: any;
-  searchCategory: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.navBarData = this.navParams.data;
+  bondCategory: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private data: Data) {
+
   }
   ngOnInit() {
-    
+    this.navBarData = this.navParams.data;
   }
-  doSomething(event){
+  doSomething(event) {
 
   }
-  addBond() {
-
+  addBond(form) {
+    if (!form.valid) {
+      return console.log('input field incomplete')
+    }
+    if (form.name) {
+      this.data.bondSingleStorage(form.value, this.navBarData)
+        .then((d) => {
+          console.log('Storage DB', d)
+        })
+        .catch(e => {
+          console.log('Storage Error: ', e)
+        });
+    }
+    else {
+      this.data.bondRangeStorage(form.value, this.navBarData)
+        .then((d) => {
+          console.log('Storage DB', d)
+        })
+        .catch(e => {
+          console.log('Storage Error: ', e)
+        });
+    }
   }
   searchBond() {
 
   }
 }
+
+

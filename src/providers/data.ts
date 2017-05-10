@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { UUID } from 'angular2-uuid';
 import { Database } from './database';
 
-/*
-  Generated class for the Data provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Data {
 
@@ -25,5 +21,16 @@ export class Data {
     let qurey = `SELECT * FROM bond where number BETWEEN ${start} and ${end}`
     return this.db.executeSql(qurey)
   }
-
+  bondSingleStorage(bondNumber, bondType) {
+    let id = UUID.UUID();
+    let qurey = `INSERT INTO bondStorage (id, bondNumber, bondType) VALUES (\'${id}\' ,${Number(bondNumber)},${Number(bondType)})`;
+    return this.db.executeSql(qurey)
+  }
+  bondRangeStorage(bondNumber, bondType) {
+    for (var i = bondNumber.from; i <= bondNumber.to; i++) {
+      let id = UUID.UUID();
+      let qurey = `INSERT INTO bondStorage (id, bondNumber, bondType) VALUES (\'${id}\',${i},${bondType})`;
+      return this.db.executeSql(qurey)
+    }
+  }
 }
