@@ -69,7 +69,7 @@ export class HomePage {
     let num = '515743'
     this.data.findOne(num)
       .then((d) => {
-        console.log('Executed SQL', d)
+        console.log('Executed SQL', d.rows.item(0))
       })
       .catch(e => {
         console.log('Executed SQL Error: ', e)

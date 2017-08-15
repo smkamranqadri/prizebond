@@ -13,7 +13,11 @@ export class StoreBondNumber implements OnInit {
   navBarData: any;
   bondCategory: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private data: Data) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private data: Data
+  ) {
 
   }
   ngOnInit() {
@@ -37,16 +41,16 @@ export class StoreBondNumber implements OnInit {
     }
     else {
       this.data.bondRangeStorage(form.value, this.navBarData)
-    /*    .then((d) => {
-          console.log('Storage DB', d)
-        })
-        .catch(e => {
-          console.log('Storage Error: ', e)
-        });*/
+      /*    .then((d) => {
+            console.log('Storage DB', d)
+          })
+          .catch(e => {
+            console.log('Storage Error: ', e)
+          });*/
     }
   }
   searchBond() {
-    this.data.findSingle(121212)
+    this.data.findSingle(196871)
       .then((d) => {
         console.log('Storage DB Find', d)
       })
