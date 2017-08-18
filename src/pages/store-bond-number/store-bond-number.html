@@ -1,61 +1,64 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Bond Number: {{navBarData}}</ion-title>
-  </ion-navbar>
-  <ion-buttons start>
-    <button (click)="dbTo()">To</button>
-  </ion-buttons>
-  
+    <ion-navbar>
+        <ion-title>Bond Number: {{navBarData}}</ion-title>
+    </ion-navbar>
+    <ion-buttons start>
+        <button (click)="dbTo()">To</button>
+    </ion-buttons>
+
 </ion-header>
 
 
 <ion-content padding>
 
-  <div style="width: 100%; display: flex; padding-left: 20px" radio-group [(ngModel)]="bondCategory" (ionChange)="doSomething($event)">
-    <ion-item style="width: 45%;">
-      <ion-label>Range</ion-label>
-      <ion-radio value="range"></ion-radio>
-    </ion-item>
+    <div style="width: 100%; display: flex; padding-left: 20px" radio-group [(ngModel)]="bondCategory" (ionChange)="doSomething($event)">
+        <ion-item style="width: 45%;">
+            <ion-label>Range</ion-label>
+            <ion-radio value="range"></ion-radio>
+        </ion-item>
 
-    <ion-item style="width: 45%;">
-      <ion-label>Single</ion-label>
-      <ion-radio selected value="single"></ion-radio>
-    </ion-item>
-  </div>
-  <div *ngIf="bondCategory == 'single'">
-    <form #single="ngForm" (ngSubmit)="addBond(single)" novalidate>
-      <ion-item>
-        <ion-label floating>Bond Number</ion-label>
-        <ion-input type="number" name="single" #single="ngModel" ngModel required></ion-input>
-      </ion-item>
-      <br/>
-      <div>
-        <button ion-button secondary type="submit" round>ADD</button>
-      </div>
-    </form>
-  </div>
+        <ion-item style="width: 45%;">
+            <ion-label>Single</ion-label>
+            <ion-radio selected value="single"></ion-radio>
+        </ion-item>
+    </div>
+    <div *ngIf="bondCategory == 'single'">
+        <form #single="ngForm" (ngSubmit)="addBond(single)" novalidate>
+            <ion-item>
+                <ion-label floating>Bond Number</ion-label>
+                <ion-input type="number" name="single" #single="ngModel" ngModel required></ion-input>
+            </ion-item>
+            <br/>
+            <div>
+                <button ion-button secondary type="submit" round>ADD</button>
+            </div>
+        </form>
+    </div>
 
-  <div *ngIf="bondCategory == 'range'">
-    <form #range="ngForm" (ngSubmit)="addBond(range)" novalidate>
-      <ion-item>
-        <ion-label floating>From</ion-label>
-        <ion-input type="number" name="from" #form="ngModel" ngModel required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>To</ion-label>
-        <ion-input type="number" name="to" #to="ngModel" ngModel required></ion-input>
-      </ion-item>
-      <br/>
-      <div>
-        <button ion-button secondary type="submit" round>ADD</button>
-      </div>
-    </form>
-  </div>
+    <div *ngIf="bondCategory == 'range'">
+        <form #range="ngForm" (ngSubmit)="addBond(range)" novalidate>
+            <ion-item>
+                <ion-label floating>From</ion-label>
+                <ion-input type="number" name="from" #form="ngModel" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>To</ion-label>
+                <ion-input type="number" name="to" #to="ngModel" ngModel required></ion-input>
+            </ion-item>
+            <br/>
+            <div>
+                <button ion-button secondary type="submit" round>ADD</button>
+            </div>
+        </form>
+    </div>
 
-  <div>
-    <button ion-button secondary (click)="searchBond()" block round>SEARCH</button>
-  </div>
+    <div>
+        <button ion-button secondary (click)="storageBondSingle()" block round>sStorage Bond Single</button>
+    </div>
+    <div>
+        <button ion-button secondary (click)="storageBondRange()" block round>Storage Bond Range</button>
+    </div>
 
 
 </ion-content>

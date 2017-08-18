@@ -8,9 +8,7 @@ import { Database } from './database';
 @Injectable()
 export class Data {
 
-  constructor(public http: Http, private db: Database) {
-    console.log('Hello Data Provider');
-  }
+  constructor(public http: Http, private db: Database) {}
 
   findOne(num) {
     let qurey = `SELECT * FROM bond where number = ${num}`
@@ -22,8 +20,13 @@ export class Data {
     return this.db.executeSql(qurey)
   }
 
-  findSingle(num) {
-    let qurey = `SELECT * FROM bondStorage where bondNumber = ${num}`
+  findSingle() {
+    let qurey = `SELECT number FROM bond where number IN (SELECT bondNumber FROM bondStorage)`
+    return this.db.executeSql(qurey)
+  }
+
+  findRange() {
+    let qurey = `SELECT number FROM bond where number IN (SELECT bondNumber FROM bondStorage)`
     return this.db.executeSql(qurey)
   }
 

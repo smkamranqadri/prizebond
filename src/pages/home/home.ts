@@ -22,7 +22,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, private platform: Platform, private transfer: Transfer, private file: File, private sqlite: SQLite, private data: Data) {
     this.prizeBondCategory = ['100', '200', '500', '750', '1500', '7500', '15000', '25000', '40000'];
     this.storeBondNumber = StoreBondNumber;
-   
+
   }
 
 
@@ -36,17 +36,7 @@ export class HomePage {
     console.log("toError", err)
   }
 
-  downloadFile() {
-    const fileTransfer: TransferObject = this.transfer.create();
-    const url = "https://drive.google.com/open?id=0B1BZyhMfg4s5SnplRkVwRTRsS2c"
-    fileTransfer.download(url, cordova.file.applicationStorageDirectory)
-      .then(data => {
-        console.log("data", data)
-
-      }, err => {
-        console.log("Err", err)
-      });
-  }
+  /* dbRemove */
   dbRemove() {
     window.plugins.sqlDB.remove('bond.db', 0, this.removeSuccess, this.removeError);
   }
@@ -56,6 +46,9 @@ export class HomePage {
   removeError(err) {
     console.log("removeError", err)
   }
+  /* dbRemove */
+
+  /* dbCopy */
   dbCopy() {
     window.plugins.sqlDB.copy('bond.db', 0, this.copySuccess, this.copyError);
   }
@@ -65,6 +58,8 @@ export class HomePage {
   copyError(err) {
     console.log("copyError", err)
   }
+  /* dbCopy */
+
   single() {
     let num = '515743'
     this.data.findOne(num)
@@ -88,25 +83,6 @@ export class HomePage {
       });
   }
 
-  createDraw() {
-    this.sqlite.create({ name: 'bond.db', location: 'default' })
-      .then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE `draw` (`id`	TEXT, `draw_number`	NUMERIC, `bond`	NUMERIC, `date`	TEXT, `day`	TEXT, `city`	TEXT );', {})
-          .then((d) => console.log('Executed SQL', d))
-          .catch(e => console.log('Executed SQL Error: ', e));
-      })
-      .catch(e => console.log('DB Create Error: ', e));
-  }
-
-  createBond() {
-    this.sqlite.create({ name: 'bond.db', location: 'default' })
-      .then((db: SQLiteObject) => {
-        db.executeSql('CREATE TABLE `bond` (`id`	TEXT, `number`	NUMERIC, `draw_id`	TEXT, `prize`	TEXT );', {})
-          .then((d) => console.log('Executed SQL', d))
-          .catch(e => console.log('Executed SQL Error: ', e));
-      })
-      .catch(e => console.log('DB Create Error: ', e));
-  }
 
   addBond() {
     this.sqlite.create({ name: 'bond.db', location: 'default' })

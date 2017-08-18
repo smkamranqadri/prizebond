@@ -50,7 +50,19 @@ export class StoreBondNumber implements OnInit {
     }
   }
   searchBond() {
-    this.data.findSingle(196871)
+
+  }
+  storageBondSingle() {
+    this.data.findSingle()
+      .then((d) => {
+        console.log('Storage DB Find', d)
+      })
+      .catch(e => {
+        console.log('Storage Find Error: ', e)
+      });
+  }
+  storageBondRange() {
+    this.data.findRange()
       .then((d) => {
         console.log('Storage DB Find', d)
       })
