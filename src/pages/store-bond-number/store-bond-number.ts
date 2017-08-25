@@ -31,7 +31,7 @@ export class StoreBondNumber implements OnInit {
       return console.log('input field incomplete')
     }
     if (form.name) {
-      this.data.bondSingleStorage(form.value, this.navBarData)
+      this.data.bondSingleStorage(form.value, '0')
         .then((d) => {
           console.log('Storage DB', d)
         })
@@ -40,7 +40,7 @@ export class StoreBondNumber implements OnInit {
         });
     }
     else {
-      this.data.bondRangeStorage(form.value, this.navBarData)
+      this.data.bondRangeStorage(form.value, '0')
       /*    .then((d) => {
             console.log('Storage DB', d)
           })
@@ -55,7 +55,11 @@ export class StoreBondNumber implements OnInit {
   storageBondSingle() {
     this.data.findSingle()
       .then((d) => {
-        console.log('Storage DB Find', d)
+        if (d.rows.length > 0) {
+          for (var i = 0; i < d.rows.length; i++) {
+            alert(d.rows.item(i).bond_number)
+          }
+        }
       })
       .catch(e => {
         console.log('Storage Find Error: ', e)

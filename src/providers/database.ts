@@ -17,6 +17,7 @@ export class Database {
   openDataBase() {
     this.sqlite.create({ name: 'bond.db', location: 'default' })
       .then((db: SQLiteObject) => {
+        console.log('DB open',db);
         this.db = db;
       })
       .catch(e => {

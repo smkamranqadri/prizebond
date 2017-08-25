@@ -1,11 +1,18 @@
 import { Data } from '../../providers/data';
-import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-import { File } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-
 import { StoreBondNumber } from '../store-bond-number/store-bond-number';
+export enum bondEnum {
+  'Rs100',
+  'Rs200',
+  'Rs750',
+  'Rs1500',
+  'Rs7500',
+  'Rs15000',
+  'Rs25000',
+  'Rs40000'
+}
 
 declare var window: any;
 declare var cordova: any;
@@ -14,59 +21,86 @@ declare var cordova: any;
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
   storeBondNumber: any;
   prizeBondCategory = [];
-
+  options: string[];
+  myValue: bondEnum;
+  bondEnum: typeof bondEnum = bondEnum;
+  bond: any;
   public bondArr: Array<Object>;
-  constructor(public navCtrl: NavController, private platform: Platform, private transfer: Transfer, private file: File, private sqlite: SQLite, private data: Data) {
+
+  constructor(public navCtrl: NavController,
+    private sqlite: SQLite,
+    private data: Data) {
     this.prizeBondCategory = ['100', '200', '500', '750', '1500', '7500', '15000', '25000', '40000'];
     this.storeBondNumber = StoreBondNumber;
 
   }
-
-
-  dbTo() {
-    window.plugins.sqlDB.copyDbToStorage('bond.db', 1, ' /sdcard/mydb/', true, this.success, this.error);
+  ngOnInit() {
+    var x = bondEnum;
+    var options = Object.keys(bondEnum);
+    this.options = options.slice(options.length / 2);
   }
+
+  parseValue(value: string) {
+    this.myValue = bondEnum[value];
+    this.bond = this.myValue;
+  }
+
   success(data) {
-    console.log("toData", data);
+    console.log("Data", data);
   }
   error(err) {
-    console.log("toError", err)
+    console.log("Error", err)
   }
 
-  /* dbRemove */
+  /* dbFrom */
+ /*  dbFrom() {
+    window.plugins.sqlDB.copyDbFromStorage('bond.db', 1, '/sdcard/mydb/', false, this.success, this.error);
+  } */
+
+  dbTo() {
+    window.plugins.sqlDB.copyDbToStorage('bond.db', 1, '/sdcard/mydb/', true, this.success, this.error);
+  }
+
   dbRemove() {
-    window.plugins.sqlDB.remove('bond.db', 0, this.removeSuccess, this.removeError);
+    window.plugins.sqlDB.remove('bond.db', 0, this.success, this.error);
   }
-  removeSuccess(data) {
-    console.log("removeData", data);
-  }
-  removeError(err) {
-    console.log("removeError", err)
-  }
-  /* dbRemove */
 
-  /* dbCopy */
   dbCopy() {
-    window.plugins.sqlDB.copy('bond.db', 0, this.copySuccess, this.copyError);
+    window.plugins.sqlDB.copy('bond.db', 0, this.success, this.error);
   }
-  copySuccess(data) {
-    console.log("copyData", data);
+  getTableName() {
+    this.data.tableName()
+      .then((d) => {
+        if (d.rows.length > 0) {
+          for (var i = 0; i < d.rows.length; i++) {
+            alert(d.rows.item(i).name)
+          }
+        }
+        console.log('Executed SQL', d)
+      })
+      .catch(e => {
+        alert(e);
+        console.log('Executed SQL Error: ', e)
+      });
   }
-  copyError(err) {
-    console.log("copyError", err)
-  }
-  /* dbCopy */
 
   single() {
-    let num = '515743'
-    this.data.findOne(num)
+    let num = '515743';
+    let bondType = '0';
+    this.data.findOne(num, bondType)
       .then((d) => {
+        if (d.rows.length > 0) {
+          for (var i = 0; i < d.rows.length; i++) {
+            alert(d.rows.item(i).bond_prize)
+          }
+        }
         console.log('Executed SQL', d.rows.item(0))
       })
       .catch(e => {
+        alert(e);
         console.log('Executed SQL Error: ', e)
       });
   }
@@ -74,11 +108,18 @@ export class HomePage {
   range() {
     let start = '515743';
     let end = '516339';
-    this.data.findSeries(start, end)
+    let bondType = '0';
+    this.data.findSeries(start, end, bondType)
       .then((d) => {
+        if (d.rows.length > 0) {
+          for (var i = 0; i < d.rows.length; i++) {
+            alert(d.rows.item(i).bond_prize)
+          }
+        }
         console.log('Executed SQL', d)
       })
       .catch(e => {
+        alert(e);
         console.log('Executed SQL Error: ', e)
       });
   }

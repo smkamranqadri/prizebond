@@ -1,39 +1,45 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
-    <ion-buttons start>
-      <button (click)="dbCopy()">Copy</button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button (click)="dbRemove()">Remove</button>
-    </ion-buttons>
-    <ion-buttons start>
-      <button (click)="dbTo()">To</button>
-    </ion-buttons>
+        <ion-title>Home</ion-title>
+        <ion-buttons start>
+            <button (click)="dbCopy()">Copy</button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button (click)="dbRemove()">Remove</button>
+        </ion-buttons>
+        <ion-buttons start>
+            <button (click)="dbTo()">To</button>
+        </ion-buttons>
+        <!-- <ion-buttons start>
+            <button (click)="dbFrom()">From</button>
+        </ion-buttons> -->
+        <ion-buttons start>
+            <button (click)="getTableName()">Table Name</button>
+        </ion-buttons>
 
-  </ion-navbar>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button (click)="single()">
+    <button (click)="single()">
     Single
   </button>
-  <button (click)="range()">
+    <button (click)="range()">
     Range
   </button>
-  <button (click)="addBond()">
+    <button (click)="addBond()">
     Add
   </button>
-  <ion-list>
-    <ion-item *ngFor="let list of prizeBondCategory" [navPush]="storeBondNumber" [navParams]="list">{{list}}</ion-item>
-  </ion-list>
-  <div style="position: fixed;right: 20px;bottom: 50px;">
-    <button ion-fab color="primary">
+    <ion-list>
+        <ion-item *ngFor="let list of prizeBondCategory" [navPush]="storeBondNumber" [navParams]="list">{{list}}</ion-item>
+    </ion-list>
+    <div style="position: fixed;right: 20px;bottom: 50px;">
+        <button ion-fab color="primary">
       <ion-icon name="refresh"></ion-icon>
       </button>
-  </div>
+    </div>
 
 </ion-content>
